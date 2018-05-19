@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <%- include app/templates/partials/head %>
+
+</head>
+<body>
+    <%- include app/templates/partials/navigation %>
+    <div class="container">
+        <div class="row my-3">
+            <div class="col">
+                <h1>Questions</h1>
+            </div>
+        </div>
+        <div class="row my-3">
+            <div class="col">
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Unanswered <span class="badge badge-light">3</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Answered <span class="badge badge-dark">28</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="list-group">
+                    <a href="/question_answered.html" class="list-group-item list-group-item-action">Not know how to read or Not know how to write</a>
+                    <a href="/question.html" class="list-group-item list-group-item-action">Be horribly and hopelessly depressed or Have inescapable overwhelming anxiety</a>
+                    <a href="/question.html" class="list-group-item list-group-item-action">Be a centaur or Be a mermaid/man</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
