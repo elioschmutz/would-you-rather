@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import Navigation from './Navigation.js'
 import { BrowserRouter as Router } from 'react-router-dom'
 
@@ -6,9 +6,10 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="App">
+        <Fragment>
           <Navigation />
-        </div>
+          <div className="App h-100 container">Content</div>
+        </Fragment>
       </Router>
     )
   }
