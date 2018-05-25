@@ -147,6 +147,19 @@ function formatQuestion ({ optionOneText, optionTwoText, author }) {
   }
 }
 
+export function _loginUser(username, password) {
+  return new Promise((res, rej) => {
+    _getUsers().then((users) => {
+      const user = users[username] || {}
+      if (user.password === password) {
+        res(user)
+      } else {
+        rej(user)
+      }
+    })
+  })
+}
+
 export function _saveQuestion (question) {
   return new Promise((res, rej) => {
     const authedUser = question.author;
