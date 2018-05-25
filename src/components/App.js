@@ -5,14 +5,10 @@ import LoginView from './LoginView.js'
 import LogoutView from './LogoutView.js'
 import PrivateRoute from './PrivateRoute.js'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { handleInitialData } from '../actions/shared'
 import LoadingBar from 'react-redux-loading'
 import { connect } from 'react-redux'
 
 class App extends Component {
-  componentDidMount = () => {
-    this.props.dispatch(handleInitialData())
-  }
   render() {
     return (
       <Router>

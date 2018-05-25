@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { loginUser } from '../actions/shared.js'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { handleInitialData } from '../actions/shared'
 
 class LoginView extends Component {
   state = {
@@ -28,6 +29,7 @@ class LoginView extends Component {
   }
 
   handleLoginSuccessful() {
+    this.props.dispatch(handleInitialData())
     this.setState({ redirectToReferrer: true })
   }
 
