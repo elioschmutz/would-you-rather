@@ -5,17 +5,18 @@ import LoginView from './LoginView.js'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { handleInitialData } from '../actions/shared'
 import LoadingBar from 'react-redux-loading'
+import { connect } from 'react-redux';
 
 class App extends Component {
   componentDidMount = () => {
-    this.props.store.dispatch(handleInitialData())
+    this.props.dispatch(handleInitialData())
   }
   render() {
     return (
       <Router>
         <Fragment>
           <Navigation />
-          <LoadingBar store={this.props.store} />
+          <LoadingBar />
           <div className="App h-100 container">
             <Route path="/" exact component={DashboardView} />
             <Route path="/login" exact component={LoginView} />
@@ -26,4 +27,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default connect()(App)
