@@ -11,9 +11,7 @@ class Navigation extends Component {
   render() {
     return (
       <nav className="main-navigation navbar navbar-expand-md navbar-dark bg-primary">
-        <a className="navbar-brand" href="/">
-          Would you rather?
-        </a>
+        <Link to="/" className="navbar-brand">Would you rather?</Link>
         <div className="collapse navbar-collapse" id="main-navigation">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
