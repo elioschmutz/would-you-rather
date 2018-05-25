@@ -1,7 +1,7 @@
 import { receiveQuestions } from './questions'
+import { setAuthedUser } from './authedUser'
 import { receiveUsers } from './users'
-import { _getQuestions } from '../_DATA.js'
-import { _getUsers } from '../_DATA.js'
+import { _getQuestions, _getUsers, _loginUser } from '../_DATA.js'
 import { showLoading, hideLoading } from 'react-redux-loading'
 
 export function handleInitialData() {
@@ -15,6 +15,17 @@ export function handleInitialData() {
         dispatch(receiveUsers(users))
       })
     ]).then(() => {
+      dispatch(hideLoading())
+    })
+  }
+}
+
+export function loginUser(username, password) {
+  return dispatch => {
+    dispatch(showLoading())
+    return _loginUser(username, password).then(user => {
+      dispatch(setAuthedUser(user.id))
+    }).finally(() => {
       dispatch(hideLoading())
     })
   }
