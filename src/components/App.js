@@ -3,8 +3,9 @@ import Navigation from './Navigation.js'
 import DashboardView from './DashboardView.js'
 import LoginView from './LoginView.js'
 import LogoutView from './LogoutView.js'
+import NotFoundView from './NotFoundView.js'
 import PrivateRoute from './PrivateRoute.js'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import LoadingBar from 'react-redux-loading'
 import { connect } from 'react-redux'
 
@@ -16,9 +17,12 @@ class App extends Component {
           <Navigation />
           <LoadingBar />
           <div className="App h-100 container">
-            <PrivateRoute path="/" exact component={DashboardView} />
-            <Route path="/login" exact component={LoginView} />
-            <PrivateRoute path="/logout" exact component={LogoutView} />
+            <Switch>
+              <PrivateRoute path="/" exact component={DashboardView} />
+              <Route path="/login" exact component={LoginView} />
+              <PrivateRoute path="/logout" exact component={LogoutView} />
+              <Route component={NotFoundView} />
+            </Switch>
           </div>
         </Fragment>
       </Router>
