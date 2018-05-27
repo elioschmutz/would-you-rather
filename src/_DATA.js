@@ -122,6 +122,26 @@ function generateUID () {
   return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
 }
 
+export function _addUser (username, name, password, avatarURL) {
+  return new Promise((res, rej) => {
+    if (users[name]) {
+      rej('user already exists')
+    }
+
+    const user = {
+      id: username,
+      name,
+      password,
+      avatarURL,
+      answers: [],
+      questions: []
+    }
+
+    users[username] = user
+    setTimeout(() => res(user), 1000)
+  })
+}
+
 export function _getUsers () {
   return new Promise((res, rej) => {
     setTimeout(() => res({...users}), 1000)
