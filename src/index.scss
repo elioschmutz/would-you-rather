@@ -1,2 +1,16 @@
 @import "custom";
 @import 'bootstrap/scss/bootstrap';
+
+
+.create-avatar-input {
+  width: 120px;
+  height: 120px;
+  background-color: white;
+  background-image: url('./icons/person.svg');
+  background-size: 32px 32px;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 1px solid #ced4da;
+}
