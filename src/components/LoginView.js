@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { loginUser } from '../actions/shared.js'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 
@@ -95,6 +95,7 @@ class LoginView extends Component {
                     id="username"
                     aria-describedby="usernameHelp"
                     placeholder="Enter username"
+                    required
                     value={username}
                     onChange={this.handleUsernameChange}
                   />
@@ -106,13 +107,23 @@ class LoginView extends Component {
                     className="form-control"
                     id="password"
                     placeholder="Password"
+                    required
                     value={password}
                     onChange={this.handlePasswordChange}
                   />
                 </div>
-                <button type="submit" disabled={this.state.loading} className="btn btn-primary">
-                  Login
-                </button>
+                <div className="row justify-content-betwee">
+                  <div className="col-sm">
+                    <button type="submit" disabled={this.state.loading} className="btn btn-primary">
+                      Login
+                    </button>
+                  </div>
+                  <div className="col-sm">
+                    <Link to="/register" className="btn btn-outline-dark">
+                      Sign-Up
+                    </Link>
+                  </div>
+                </div>
               </form>
             </div>
           </div>

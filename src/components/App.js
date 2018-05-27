@@ -3,6 +3,7 @@ import Navigation from './Navigation.js'
 import DashboardView from './DashboardView.js'
 import LoginView from './LoginView.js'
 import LogoutView from './LogoutView.js'
+import RegisterView from './RegisterView.js'
 import NotFoundView from './NotFoundView.js'
 import PrivateRoute from './PrivateRoute.js'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
@@ -20,6 +21,7 @@ class App extends Component {
             <Switch>
               <PrivateRoute path="/" exact component={DashboardView} />
               <Route path="/login" exact component={LoginView} />
+              <Route path="/register" exact component={RegisterView} />
               <PrivateRoute path="/logout" exact component={LogoutView} />
               <Route component={NotFoundView} />
             </Switch>
