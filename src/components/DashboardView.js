@@ -1,8 +1,41 @@
 import React, { Component } from 'react'
 import Heading from './Heading.js'
+import { connect } from 'react-redux'
+import QuestionList from './QuestionList.js'
+import Button from './Button.js'
+import PropTypes from 'prop-types'
 
 class DashboardView extends Component {
+  state = {
+    showAnswered: false
+  }
+
+  static propTypes = {
+    questions: PropTypes.array.isRequired
+  }
+
+  showUnansweredQuestions = () => {
+    this.setState({ showAnswered: false })
+  }
+
+  showAnsweredQuestions = () => {
+    this.setState({ showAnswered: true })
+  }
+
+  isAnswered = question => {
+    const { authedUser } = this.props
+    return (
+      question.optionOne.votes.includes(authedUser) || question.optionTwo.votes.includes(authedUser)
+    )
+  }
   render() {
+    const { showAnswered } = this.state
+    const { questions } = this.props
+
+    const sortedQuestions = questions.sort((a, b) => b.timestamp - a.timestamp)
+    const answeredQuestions = sortedQuestions.filter(question => this.isAnswered(question))
+    const unansweredQuestions = sortedQuestions.filter(question => !this.isAnswered(question))
+
     return (
       <div>
         <Heading>Questions</Heading>
@@ -10,36 +43,34 @@ class DashboardView extends Component {
           <div className="col">
             <ul className="nav nav-pills">
               <li className="nav-item">
-                <a className="nav-link active" href="#">
-                  Unanswered <span className="badge badge-light">3</span>
-                </a>
+                <Button
+                  className="nav-link"
+                  active={!showAnswered}
+                  handleOnClick={this.showUnansweredQuestions}
+                >
+                  Unanswered <span className="badge badge-light">{unansweredQuestions.length}</span>
+                </Button>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Answered <span className="badge badge-dark">28</span>
-                </a>
+                <Button
+                  className="nav-link"
+                  active={showAnswered}
+                  handleOnClick={this.showAnsweredQuestions}
+                >
+                  Answered <span className="badge badge-dark">{answeredQuestions.length}</span>
+                </Button>
               </li>
             </ul>
           </div>
         </div>
-        <div className="row">
-          <div className="col">
-            <div className="list-group">
-              <a href="/question_answered.html" className="list-group-item list-group-item-action">
-                Not know how to read or Not know how to write
-              </a>
-              <a href="/question.html" className="list-group-item list-group-item-action">
-                Be horribly and hopelessly depressed or Have inescapable overwhelming anxiety
-              </a>
-              <a href="/question.html" className="list-group-item list-group-item-action">
-                Be a centaur or Be a mermaid/man
-              </a>
-            </div>
-          </div>
-        </div>
+        <QuestionList questions={showAnswered ? answeredQuestions : unansweredQuestions} />
       </div>
     )
   }
 }
 
-export default DashboardView
+const mapStateToProps = ({ questions, authedUser }) => ({
+  questions: Object.values(questions),
+  authedUser
+})
+export default connect(mapStateToProps)(DashboardView)
