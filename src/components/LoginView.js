@@ -10,11 +10,16 @@ class LoginView extends Component {
     username: '',
     password: '',
     showLoginErrorMessage: false,
-    loading: false
+    loading: false,
+    autoLogin: false
   }
 
   loginErrorTimeout = 5000
   currentLoginErrorTimeoutObj = null
+
+  componentDidMount() {
+    this.handleAutoLogin()
+  }
 
   componentWillUnmount() {
     this.clearCurrentLoginErrorTimeout()
@@ -45,9 +50,14 @@ class LoginView extends Component {
     }, this.loginErrorTimeout)
   }
 
-  handleSubmit = e => {
-    e.preventDefault()
-    const { username, password } = this.state
+  handleAutoLogin() {
+    if (this.state.autoLogin === true) {
+      // Useful for development
+      this.handleLogin('sarahedo', 'secret')
+    }
+  }
+
+  handleLogin(username, password) {
     if (!username || !password) {
       return
     }
@@ -67,9 +77,15 @@ class LoginView extends Component {
       )
   }
 
+  handleSubmit = e => {
+    e.preventDefault()
+    const { username, password } = this.state
+    this.handleLogin(username, password)
+  }
+
   render() {
     const { from } = this.props.location.state || { from: { pathname: '/' } }
-    const { username, password, redirectToReferrer, showLoginErrorMessage } = this.state
+    const { username, password, redirectToReferrer, showLoginErrorMessage, autoLogin } = this.state
 
     if (redirectToReferrer === true) {
       return <Redirect to={from} />
