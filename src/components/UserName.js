@@ -1,22 +1,32 @@
 import './UserName.css'
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-const UserName = props => {
-  return (
-    <div className="user-name">
-      <div
-        style={{ backgroundImage: `url("${props.image || './fallback-user.png'}")` }}
-        className="user-image"
-      />
-      <span>{props.name}</span>
-    </div>
-  )
+class UserName extends Component {
+  static propTypes = {
+    userid: PropTypes.string.isRequired
+  }
+
+  render() {
+    const { users, userid } = this.props
+    const user = users[userid]
+
+    if (!user) {
+      return ''
+    }
+
+    return (
+      <div className="user-name">
+        <div
+          style={{ backgroundImage: `url("${user.avatarURL || './fallback-user.png'}")` }}
+          className="user-image"
+        />
+        <span>{user.name}</span>
+      </div>
+    )
+  }
 }
 
-UserName.propTypes = {
-  name: PropTypes.string.isRequired,
-  image: PropTypes.string
-}
-
-export default UserName
+const mapStateToProps = ({ users }) => ({ users })
+export default connect(mapStateToProps)(UserName)

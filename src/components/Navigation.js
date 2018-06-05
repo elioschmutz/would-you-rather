@@ -9,15 +9,14 @@ import { connect } from 'react-redux'
 
 class Navigation extends Component {
   render() {
-    const { users, authedUser } = this.props
-    const currentUser = users[authedUser]
+    const { authedUser } = this.props
 
     return (
       <nav className="main-navigation navbar navbar-expand-md navbar-dark bg-primary">
         <Link to="/" className="navbar-brand">
           Would you rather?
         </Link>
-        {this.props.authedUser && currentUser && (
+        {authedUser && (
           <div className="collapse navbar-collapse" id="main-navigation">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
@@ -47,7 +46,7 @@ class Navigation extends Component {
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  <UserName name={currentUser.name} image={currentUser.avatarURL} />
+                  <UserName userid={authedUser} />
                 </a>
                 <div
                   className="dropdown-menu dropdown-menu-right"
@@ -66,5 +65,5 @@ class Navigation extends Component {
   }
 }
 
-const mapStateToProps = ({ authedUser, users }) => ({ authedUser, users })
+const mapStateToProps = ({ authedUser }) => ({ authedUser })
 export default connect(mapStateToProps)(Navigation)

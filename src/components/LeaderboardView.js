@@ -43,7 +43,7 @@ class LeaderboardView extends Component {
                   <tr key={user.id}>
                     <th className="align-middle">{index + 1}</th>
                     <td className="align-middle">
-                      <UserName name={user.name} image={user.avatarURL} />
+                      <UserName userid={user.id} />
                     </td>
                     <td className="align-middle">{this.count_asked(user)}</td>
                     <td className="align-middle">{this.count_answered(user)}</td>
