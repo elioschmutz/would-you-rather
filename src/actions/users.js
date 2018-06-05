@@ -3,6 +3,7 @@ import { showLoading, hideLoading } from 'react-redux-loading'
 
 export const RECEIVE_USERS = 'RECEIVE_USERS'
 export const ADD_USER = 'ADD_USER'
+export const ADD_QUESTION_TO_USER = 'ADD_QUESTION_TO_USER'
 
 export function receiveUsers(users) {
   return {
@@ -15,6 +16,14 @@ export function addUser(user) {
   return {
     type: ADD_USER,
     user
+  }
+}
+
+export function addQuestionToUser(question) {
+  return {
+    type: ADD_QUESTION_TO_USER,
+    author: question.author,
+    question
   }
 }
 
