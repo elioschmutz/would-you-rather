@@ -18,3 +18,23 @@
 button {
   cursor: pointer;
 }
+
+.or {
+    font-size: 5em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.answer-container {
+    text-align: center;
+    .answer-text {
+        font-size: 2em;
+    }
+    .answer-percentage {
+        font-size: 5em;
+    }
+}
+
+.pointer {
+  cursor: pointer;
+}

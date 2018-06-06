@@ -6,6 +6,7 @@ import LogoutView from './LogoutView.js'
 import RegisterView from './RegisterView.js'
 import LeaderboardView from './LeaderboardView.js'
 import AddQuestionView from './AddQuestionView.js'
+import QuestionView from './QuestionView.js'
 import NotFoundView from './NotFoundView.js'
 import PrivateRoute from './PrivateRoute.js'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
@@ -24,6 +25,7 @@ class App extends Component {
               <PrivateRoute path="/" exact component={DashboardView} />
               <PrivateRoute path="/leaderboard" exact component={LeaderboardView} />
               <PrivateRoute path="/add" exact component={AddQuestionView} />
+              <PrivateRoute path="/questions/:question_id" exact component={QuestionView} />
               <Route path="/login" exact component={LoginView} />
               <Route path="/register" exact component={RegisterView} />
               <PrivateRoute path="/logout" exact component={LogoutView} />
