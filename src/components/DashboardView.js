@@ -28,13 +28,14 @@ class DashboardView extends Component {
     )
   }
   render() {
-    const { questions, currentCategory } = this.props
+    const { questions, currentCategory, loadingBar } = this.props
 
     const sortedQuestions = questions.sort((a, b) => b.timestamp - a.timestamp)
     const answeredQuestions = sortedQuestions.filter(question => this.isAnswered(question))
     const unansweredQuestions = sortedQuestions.filter(question => !this.isAnswered(question))
 
     const showAnswered = currentCategory === categories.answered
+    const isLoading = loadingBar.default === 1
 
     return (
       <div>
@@ -48,7 +49,10 @@ class DashboardView extends Component {
                   active={!showAnswered}
                   handleOnClick={this.showUnansweredQuestions}
                 >
-                  Unanswered <span className="badge badge-light">{unansweredQuestions.length}</span>
+                  Unanswered{' '}
+                  <span className="badge badge-light">
+                    {isLoading ? '-' : unansweredQuestions.length}
+                  </span>
                 </Button>
               </li>
               <li className="nav-item">
@@ -57,21 +61,27 @@ class DashboardView extends Component {
                   active={showAnswered}
                   handleOnClick={this.showAnsweredQuestions}
                 >
-                  Answered <span className="badge badge-dark">{answeredQuestions.length}</span>
+                  Answered{' '}
+                  <span className="badge badge-dark">
+                    {isLoading ? '-' : answeredQuestions.length}
+                  </span>
                 </Button>
               </li>
             </ul>
           </div>
         </div>
-        <QuestionList questions={showAnswered ? answeredQuestions : unansweredQuestions} />
+        {!isLoading && (
+          <QuestionList questions={showAnswered ? answeredQuestions : unansweredQuestions} />
+        )}
       </div>
     )
   }
 }
 
-const mapStateToProps = ({ questions, authedUser, currentCategory }) => ({
+const mapStateToProps = ({ questions, authedUser, currentCategory, loadingBar }) => ({
   questions: Object.values(questions),
   authedUser,
-  currentCategory
+  currentCategory,
+  loadingBar
 })
 export default connect(mapStateToProps)(DashboardView)
