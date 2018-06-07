@@ -14,17 +14,21 @@ class QuestionList extends Component {
       <div>
         <div className="row">
           <div className="col">
-            <div className="list-group">
-              {questions.map(question => (
-                <Link
-                  key={question.id}
-                  to={`/questions/${question.id}`}
-                  className="list-group-item list-group-item-action"
-                >
-                  {question.optionOne.text} or {question.optionTwo.text}
-                </Link>
-              ))}
-            </div>
+            {questions.length <= 0 ? (
+              <span>No questions available</span>
+            ) : (
+              <div className="list-group">
+                {questions.map(question => (
+                  <Link
+                    key={question.id}
+                    to={`/questions/${question.id}`}
+                    className="list-group-item list-group-item-action"
+                  >
+                    {question.optionOne.text} or {question.optionTwo.text}
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
