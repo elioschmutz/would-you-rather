@@ -4,22 +4,21 @@ import { connect } from 'react-redux'
 import QuestionList from './QuestionList.js'
 import Button from './Button.js'
 import PropTypes from 'prop-types'
+import { setCurrentCategory } from '../actions/currentCategory'
+import { categories } from '../config'
 
 class DashboardView extends Component {
-  state = {
-    showAnswered: false
-  }
-
   static propTypes = {
-    questions: PropTypes.array.isRequired
+    questions: PropTypes.array.isRequired,
+    currentCategory: PropTypes.string.isRequired
   }
 
   showUnansweredQuestions = () => {
-    this.setState({ showAnswered: false })
+    this.props.dispatch(setCurrentCategory(categories.unanswered))
   }
 
   showAnsweredQuestions = () => {
-    this.setState({ showAnswered: true })
+    this.props.dispatch(setCurrentCategory(categories.answered))
   }
 
   isAnswered = question => {
@@ -29,12 +28,13 @@ class DashboardView extends Component {
     )
   }
   render() {
-    const { showAnswered } = this.state
-    const { questions } = this.props
+    const { questions, currentCategory } = this.props
 
     const sortedQuestions = questions.sort((a, b) => b.timestamp - a.timestamp)
     const answeredQuestions = sortedQuestions.filter(question => this.isAnswered(question))
     const unansweredQuestions = sortedQuestions.filter(question => !this.isAnswered(question))
+
+    const showAnswered = currentCategory === categories.answered
 
     return (
       <div>
@@ -69,8 +69,9 @@ class DashboardView extends Component {
   }
 }
 
-const mapStateToProps = ({ questions, authedUser }) => ({
+const mapStateToProps = ({ questions, authedUser, currentCategory }) => ({
   questions: Object.values(questions),
-  authedUser
+  authedUser,
+  currentCategory
 })
 export default connect(mapStateToProps)(DashboardView)
