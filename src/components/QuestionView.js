@@ -1,91 +1,51 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import Heading from './Heading.js'
 import UserName from './UserName.js'
-import QuestionOption from './QuestionOption.js'
+import Question from './Question.js'
 import PropTypes from 'prop-types'
-import { handleAnswerQuestion } from '../actions/questions.js'
 
 class QuestionView extends Component {
   static propTypes = {
     question: PropTypes.object,
-    user: PropTypes.object
-  }
-
-  totalVotes() {
-    const { question } = this.props
-    return question.optionOne.votes.length + question.optionTwo.votes.length
-  }
-
-  showResult() {
-    return this.props.question.id in this.props.user.answers
-  }
-
-  isOptionSelectedByCurrentUser(option) {
-    return option.votes.includes(this.props.user.id)
-  }
-
-  handleOnVote = option => {
-    const { dispatch, question } = this.props
-    dispatch(handleAnswerQuestion(question, option))
+    user: PropTypes.object,
+    isLoading: PropTypes.bool
   }
 
   render() {
-    const { question, user } = this.props
+    const { question, user, isLoading } = this.props
 
     return (
       <div>
         <Heading>Would You Rather</Heading>
-        <div className="row">
-          <div className="col col-sm-1">
-            <small className="text-muted">
-              <span>Posted by:</span>
-            </small>
-          </div>
-          <div className="col col-sm-11">
-            <small className="text-muted">
-              {question && <UserName userid={question.author} />}
-            </small>
-          </div>
-        </div>
-        {question &&
-          user && (
-            <div className="row my-3">
-              <div className="col col-sm-5">
-                <QuestionOption
-                  id="optionOne"
-                  text={question.optionOne.text}
-                  totalOptionVotes={question.optionOne.votes.length}
-                  totalVotes={this.totalVotes()}
-                  selectedByCurrentUser={this.isOptionSelectedByCurrentUser(question.optionOne)}
-                  onVote={this.handleOnVote}
-                  showResult={this.showResult()}
-                />
+        {!isLoading && (
+          <Fragment>
+            <div className="row">
+              <div className="col col-sm-1">
+                <small className="text-muted">
+                  <span>Posted by:</span>
+                </small>
               </div>
-              <div className="col col-sm-2 or">or</div>
-              <div className="col col-sm-5">
-                <QuestionOption
-                  id="optionTwo"
-                  text={question.optionTwo.text}
-                  totalOptionVotes={question.optionTwo.votes.length}
-                  totalVotes={this.totalVotes()}
-                  selectedByCurrentUser={this.isOptionSelectedByCurrentUser(question.optionTwo)}
-                  onVote={this.handleOnVote}
-                  showResult={this.showResult()}
-                />
+              <div className="col col-sm-11">
+                <small className="text-muted">
+                  {question && <UserName userid={question.author} />}
+                </small>
               </div>
             </div>
-          )}
+            {question && user && <Question question={question} user={user} />}
+          </Fragment>
+        )}
       </div>
     )
   }
 }
 
-const mapStateToProps = ({ authedUser, questions, users }, props) => {
+const mapStateToProps = ({ authedUser, questions, users, loadingBar }, props) => {
   const { question_id } = props.match.params
   return {
     user: users[authedUser],
-    question: questions[question_id]
+    question: questions[question_id],
+    isLoading: loadingBar.default === 1
   }
 }
 export default connect(mapStateToProps)(QuestionView)
