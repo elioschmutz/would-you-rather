@@ -4,6 +4,7 @@ import Heading from './Heading.js'
 import UserName from './UserName.js'
 import Question from './Question.js'
 import PropTypes from 'prop-types'
+import NotFoundView from './NotFoundView.js'
 
 class QuestionView extends Component {
   static propTypes = {
@@ -14,6 +15,10 @@ class QuestionView extends Component {
 
   render() {
     const { question, user, isLoading } = this.props
+
+    if (!isLoading && !question) {
+      return <NotFoundView />
+    }
 
     return (
       <div>
