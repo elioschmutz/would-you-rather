@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Heading from './Heading.js'
 import { connect } from 'react-redux'
 import QuestionList from './QuestionList.js'
+import Badge from './Badge.js'
 import Button from './Button.js'
 import PropTypes from 'prop-types'
 import { setCurrentCategory } from '../actions/currentCategory'
@@ -50,9 +51,9 @@ class DashboardView extends Component {
                   handleOnClick={this.showUnansweredQuestions}
                 >
                   Unanswered{' '}
-                  <span className="badge badge-light">
-                    {isLoading ? '-' : unansweredQuestions.length}
-                  </span>
+                  <Badge className="badge-light" showFallback={isLoading}>
+                    {unansweredQuestions.length}
+                  </Badge>
                 </Button>
               </li>
               <li className="nav-item">
@@ -62,9 +63,9 @@ class DashboardView extends Component {
                   handleOnClick={this.showAnsweredQuestions}
                 >
                   Answered{' '}
-                  <span className="badge badge-dark">
-                    {isLoading ? '-' : answeredQuestions.length}
-                  </span>
+                  <Badge className="badge-dark" showFallback={isLoading}>
+                    {answeredQuestions.length}
+                  </Badge>
                 </Button>
               </li>
             </ul>
