@@ -8,7 +8,6 @@ import { handleAnswerQuestion } from '../actions/questions.js'
 
 class QuestionView extends Component {
   static propTypes = {
-    authedUser: PropTypes.string,
     question: PropTypes.object,
     user: PropTypes.object
   }
@@ -26,13 +25,13 @@ class QuestionView extends Component {
     return option.votes.includes(this.props.user.id)
   }
 
-  handleOnVote = (option) => {
+  handleOnVote = option => {
     const { dispatch, question } = this.props
     dispatch(handleAnswerQuestion(question, option))
   }
 
   render() {
-    const { authedUser, question, user } = this.props
+    const { question, user } = this.props
 
     return (
       <div>
@@ -45,7 +44,7 @@ class QuestionView extends Component {
           </div>
           <div className="col col-sm-11">
             <small className="text-muted">
-              <UserName userid={authedUser} />
+              {question && <UserName userid={question.author} />}
             </small>
           </div>
         </div>
@@ -85,7 +84,6 @@ class QuestionView extends Component {
 const mapStateToProps = ({ authedUser, questions, users }, props) => {
   const { question_id } = props.match.params
   return {
-    authedUser,
     user: users[authedUser],
     question: questions[question_id]
   }
