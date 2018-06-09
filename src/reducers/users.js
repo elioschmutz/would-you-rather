@@ -15,7 +15,7 @@ export default function users(state = {}, action) {
     case ADD_USER:
       return {
         ...state,
-        ...action.user
+        [action.user.id]: { ...action.user }
       }
     case ADD_QUESTION_TO_USER:
       return {
