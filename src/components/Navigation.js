@@ -6,8 +6,13 @@ import FaListOl from 'react-icons/lib/fa/list-ol'
 import FaAngleLeft from 'react-icons/lib/fa/angle-left'
 import UserName from './UserName.js'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 class Navigation extends Component {
+  static propTypes = {
+    authedUser: PropTypes.string
+  }
+
   render() {
     const { authedUser } = this.props
 

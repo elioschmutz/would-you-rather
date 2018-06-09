@@ -11,7 +11,9 @@ import { categories } from '../config'
 class DashboardView extends Component {
   static propTypes = {
     questions: PropTypes.array.isRequired,
-    currentCategory: PropTypes.string.isRequired
+    currentCategory: PropTypes.string.isRequired,
+    authedUser: PropTypes.string.isRequired,
+    loadingBar: PropTypes.bool.isRequired
   }
 
   showUnansweredQuestions = () => {
