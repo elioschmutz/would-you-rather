@@ -102,7 +102,7 @@ class LoginView extends Component {
               </div>
             )}
             <div className="card-body">
-              <form action="index.html" onSubmit={this.handleSubmit}>
+              <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
                   <label htmlFor="username">Username</label>
                   <input
