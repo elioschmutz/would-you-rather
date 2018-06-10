@@ -13,7 +13,7 @@ class DashboardView extends Component {
     questions: PropTypes.array.isRequired,
     currentCategory: PropTypes.string.isRequired,
     authedUser: PropTypes.string.isRequired,
-    loadingBar: PropTypes.bool.isRequired
+    isLoading: PropTypes.bool.isRequired
   }
 
   showUnansweredQuestions = () => {
@@ -31,14 +31,13 @@ class DashboardView extends Component {
     )
   }
   render() {
-    const { questions, currentCategory, loadingBar } = this.props
+    const { questions, currentCategory, isLoading } = this.props
 
     const sortedQuestions = questions.sort((a, b) => b.timestamp - a.timestamp)
     const answeredQuestions = sortedQuestions.filter(question => this.isAnswered(question))
     const unansweredQuestions = sortedQuestions.filter(question => !this.isAnswered(question))
 
     const showAnswered = currentCategory === categories.answered
-    const isLoading = loadingBar.default === 1
 
     return (
       <div>
@@ -85,6 +84,6 @@ const mapStateToProps = ({ questions, authedUser, currentCategory, loadingBar })
   questions: Object.values(questions),
   authedUser,
   currentCategory,
-  loadingBar
+  isLoading: loadingBar.default === 1
 })
 export default connect(mapStateToProps)(DashboardView)
