@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { setAuthedUser } from '../actions/authedUser.js'
 import { Redirect } from 'react-router-dom'
+import { resetState } from '../actions/shared'
 
 const Logout = (props) => {
-  props.dispatch(setAuthedUser(null))
+  props.dispatch(resetState())
   return <Redirect to="/login" />
 }
 

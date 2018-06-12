@@ -4,7 +4,9 @@ import { receiveUsers } from './users'
 import { _getQuestions, _getUsers, _loginUser } from '../_DATA.js'
 import { showLoading, hideLoading } from 'react-redux-loading'
 import { laodingbars } from '../config'
+
 export const INIT_DATA_RECEIVED = 'INIT_DATA_RECEIVED'
+export const RESET_STATE = 'RESET_STATE'
 
 export function initDataReceived() {
   return {
@@ -26,6 +28,12 @@ export function handleInitialData() {
       dispatch(hideLoading(laodingbars.init))
       dispatch(initDataReceived())
     })
+  }
+}
+
+export function resetState() {
+  return {
+    type: RESET_STATE
   }
 }
 
