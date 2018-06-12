@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import InitLoadingView from './InitLoadingView.js'
 
 // https://tylermcginnis.com/react-router-protected-routes-authentication/
 const PrivateRoute = ({ component: Component, authedUser, ...rest }) => (
@@ -9,7 +10,9 @@ const PrivateRoute = ({ component: Component, authedUser, ...rest }) => (
     {...rest}
     render={props =>
       authedUser ? (
-        <Component {...props} />
+        <InitLoadingView>
+          <Component {...props} />
+        </InitLoadingView>
       ) : (
         <Redirect
           to={{

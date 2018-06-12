@@ -3,10 +3,18 @@ import { setAuthedUser } from './authedUser'
 import { receiveUsers } from './users'
 import { _getQuestions, _getUsers, _loginUser } from '../_DATA.js'
 import { showLoading, hideLoading } from 'react-redux-loading'
+import { laodingbars } from '../config'
+export const INIT_DATA_RECEIVED = 'INIT_DATA_RECEIVED'
+
+export function initDataReceived() {
+  return {
+    type: INIT_DATA_RECEIVED
+  }
+}
 
 export function handleInitialData() {
   return dispatch => {
-    dispatch(showLoading())
+    dispatch(showLoading(laodingbars.init))
     Promise.all([
       _getQuestions().then(questions => {
         dispatch(receiveQuestions(questions))
@@ -15,7 +23,8 @@ export function handleInitialData() {
         dispatch(receiveUsers(users))
       })
     ]).then(() => {
-      dispatch(hideLoading())
+      dispatch(hideLoading(laodingbars.init))
+      dispatch(initDataReceived())
     })
   }
 }
