@@ -17,11 +17,13 @@ class DashboardView extends Component {
   }
 
   showUnansweredQuestions = () => {
-    this.props.dispatch(setCurrentCategory(categories.unanswered))
+    const { dispatch, authedUser } = this.props
+    dispatch(setCurrentCategory(authedUser, categories.unanswered))
   }
 
   showAnsweredQuestions = () => {
-    this.props.dispatch(setCurrentCategory(categories.answered))
+    const { dispatch, authedUser } = this.props
+    dispatch(setCurrentCategory(authedUser, categories.answered))
   }
 
   isAnswered = question => {
@@ -83,7 +85,7 @@ class DashboardView extends Component {
 const mapStateToProps = ({ questions, authedUser, currentCategory, loadingBar }) => ({
   questions: Object.values(questions),
   authedUser,
-  currentCategory,
+  currentCategory: currentCategory[authedUser] || categories.unanswered,
   isLoading: loadingBar.default === 1
 })
 export default connect(mapStateToProps)(DashboardView)

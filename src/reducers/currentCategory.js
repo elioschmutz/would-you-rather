@@ -1,10 +1,12 @@
 import { SET_CURRENT_CATEGORY } from '../actions/currentCategory'
-import { categories } from '../config'
 
-export default function currentCategory(state = categories.unanswered, action) {
+export default function currentCategory(state = {}, action) {
   switch (action.type) {
     case SET_CURRENT_CATEGORY:
-      return action.category
+      return {
+        ...state,
+        [action.userid]: action.category
+      }
     default:
       return state
   }
