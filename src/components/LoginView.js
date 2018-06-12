@@ -106,6 +106,7 @@ class LoginView extends Component {
                 <div className="form-group">
                   <label htmlFor="username">Username</label>
                   <input
+                    data-tip="i.e. sarahedo"
                     type="username"
                     className="form-control"
                     id="username"
@@ -119,6 +120,7 @@ class LoginView extends Component {
                 <div className="form-group">
                   <label htmlFor="password">Password</label>
                   <input
+                    data-tip="default password of existing users is: `secret`"
                     type="password"
                     className="form-control"
                     id="password"

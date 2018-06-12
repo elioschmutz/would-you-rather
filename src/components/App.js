@@ -12,6 +12,7 @@ import PrivateRoute from './PrivateRoute.js'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import LoadingBar from 'react-redux-loading'
 import { connect } from 'react-redux'
+import ReactTooltip from 'react-tooltip'
 
 class App extends Component {
   render() {
@@ -20,6 +21,7 @@ class App extends Component {
         <Fragment>
           <Navigation />
           <LoadingBar />
+          <ReactTooltip />
           <div className="App h-100 container">
             <Switch>
               <PrivateRoute path="/" exact component={DashboardView} />
