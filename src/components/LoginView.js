@@ -85,7 +85,7 @@ class LoginView extends Component {
 
   render() {
     const { from } = this.props.location.state || { from: { pathname: '/' } }
-    const { username, password, redirectToReferrer, showLoginErrorMessage, autoLogin } = this.state
+    const { username, password, redirectToReferrer, showLoginErrorMessage } = this.state
 
     if (redirectToReferrer === true) {
       return <Redirect to={from} />

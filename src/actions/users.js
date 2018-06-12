@@ -28,7 +28,7 @@ export function addQuestionToUser(question) {
   }
 }
 
-export function handleAddUser({ username, name, password, avatarURL} ) {
+export function handleAddUser({ username, name, password, avatarURL }) {
   return dispatch => {
     dispatch(showLoading())
     return _addUser(username, name, password, avatarURL)
