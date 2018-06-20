@@ -4,13 +4,15 @@ This app lets a user play the “Would You Rather?” game. The game goes like t
 
 Users will be able to answer questions, see which questions they haven’t answered, see how other people have voted, post questions, and see the ranking of users on the leaderboard.
 
+![Demo of the plugin](./docs/assets/demo.gif)
+
 <!-- MarkdownTOC levels="1" autolink=true autoanchor=false bracket="round" -->
 
 - [Installation](#installation)
 - [Data](#data)
-  - [Users](#users)
-  - [Questions](#questions)
-  - [Voting Options](#voting-options)
+    - [Users](#users)
+    - [Questions](#questions)
+    - [Voting Options](#voting-options)
 - [Create React App](#create-react-app)
 
 <!-- /MarkdownTOC -->
